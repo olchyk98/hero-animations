@@ -1,0 +1,25 @@
+{
+  "name": "hero-animations",
+  "version": "1.0.0",
+  "description": "",
+  "main": "p5.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olchyk98/hero-animations.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Oles Odynets",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olchyk98/hero-animations/issues"
+  },
+  "homepage": "https://github.com/olchyk98/hero-animations#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
