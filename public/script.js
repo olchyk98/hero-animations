@@ -1,4 +1,9 @@
 // Data
+const canvas = {
+	width: window.innerWidth - .5,
+	height: window.innerHeight - .5
+}
+
 const entities = {
 	DRAC: {
 		frames: {
@@ -20,7 +25,6 @@ const entities = {
 		frames: {
 			attack: [],
 			die: [],
-			fly: [],
 			hit: [],
 			jump: [],
 			run: [],
@@ -31,11 +35,27 @@ const entities = {
 
 const modelSize = 150;
 
-let drac = {
+const drac = {
 	attack: null,
 	die: null,
 	fly: null,
 	hit: null
+}
+
+const dragon = {
+	attack: null,
+	die: null,
+	fly: null,
+	hit: null
+}
+
+const goblin = {
+	attack: null,
+	die: null,
+	hit: null,
+	jump: null,
+	run: null,
+	walk: null
 }
 
 // Class
@@ -224,24 +244,47 @@ function preload() {
 
 // Initialize
 function setup() {
-	createCanvas(innerWidth - .5, innerHeight - .5);
+	createCanvas(canvas.width, canvas.height);
 
 	drac.attack = new Animatable(entities.DRAC.frames.attack, false, 5);
 	drac.die = new Animatable(entities.DRAC.frames.die, false, 5);
 	drac.fly = new Animatable(entities.DRAC.frames.fly, false, 5);
 	drac.hit = new Animatable(entities.DRAC.frames.hit, false, 5);
+
+	dragon.attack = new Animatable(entities.DRAGON.frames.attack, false, 5);
+	dragon.die = new Animatable(entities.DRAGON.frames.die, false, 5);
+	dragon.fly = new Animatable(entities.DRAGON.frames.fly, false, 5);
+	dragon.hit = new Animatable(entities.DRAGON.frames.hit, false, 5);
+
+	goblin.attack = new Animatable(entities.GOBLIN.frames.attack, false, 5);
+	goblin.die = new Animatable(entities.GOBLIN.frames.die, false, 5);
+	goblin.hit = new Animatable(entities.GOBLIN.frames.hit, false, 5);
+	goblin.jump = new Animatable(entities.GOBLIN.frames.jump, false, 5);
+	goblin.run = new Animatable(entities.GOBLIN.frames.run, false, 5);
+	goblin.walk = new Animatable(entities.GOBLIN.frames.walk, false, 5);
 }
 
 // IN
 function draw() {
 	background('white');
 
-	Object.values(drac).forEach((io, ia) => {
+
+	let modelsLine = 0;
+	[
+		...Object.values(drac),
+		...Object.values(dragon),
+		...Object.values(goblin)
+	].forEach((io, ia) => {
 		if(!io) return console.error("Weak code. Required class is falsy");
 
+		// XXX: I AM TOO STUPID FOR THAT. I HAVE, LIKE, 20IQ. I CAN'T REALIZE IT NORMALLY.
+		let getX = () => ia * modelSize - modelsLine * (canvas.width - modelSize / 2);
+		let ypos = modelSize * ((getX() + modelSize < canvas.width) ? modelsLine : ++modelsLine);
+		let xpos = getX();
+
 		io.render({
-			x: ia * modelSize,
-			y: 0
+			x: xpos,
+			y: ypos
 		}).animate();	
 	});
 }
