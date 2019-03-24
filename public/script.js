@@ -276,8 +276,7 @@ function draw() {
 		...Object.values(goblin)
 	].forEach((io, ia) => {
 		if(!io) return console.error("Weak code. Required class is falsy");
-
-		// XXX: I AM TOO STUPID FOR THAT. I HAVE, LIKE, 20IQ. I CAN'T REALIZE IT NORMALLY.
+		
 		let getX = () => ia * modelSize - modelsLine * (canvas.width - modelSize / 2);
 		let ypos = modelSize * ((getX() + modelSize < canvas.width) ? modelsLine : ++modelsLine);
 		let xpos = getX();
